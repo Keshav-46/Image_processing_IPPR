@@ -137,24 +137,101 @@
 # cv2.destroyAllWindows()
 
 ############# image resize and interplotation
+# import cv2
+# import numpy as np
+# img=cv2.imread('3.png')
+# #lets make the size of our image 3/4 of its 
+# img_scaled=cv2.resize(img,None,fx=0.75,fy=0.75)
+# cv2.imshow('orginal Image',img)
+# cv2.imshow('sclaing-linear Interplotion',img_scaled)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+
+# #lets make the double the size of orginal image
+# img_scaled=cv2.resize(img,None,fx=2,fy=2,interpolation=cv2.INTER_CUBIC)
+# cv2.imshow('sclaing-cubic Interplotion',img_scaled)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+
+# #lets skew the resizing by setting extact dimension
+# img_scaled=cv2.resize(img,(900,400),interpolation=cv2.INTER_AREA)
+# cv2.imshow('sclaing-skewes sized',img_scaled)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+
+##############   image resize using image pyramid
+# import cv2
+# import numpy as pd
+
+# img=cv2.imread('3.png')
+# smaller=cv2.pyrDown(img)
+# larger=cv2.pyrUp(img)
+
+# cv2.imshow('Orginal',img)
+# cv2.imshow('smaller',smaller)
+# cv2.imshow('Larger',larger)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+
+##############   image cropping
+# import cv2
+# import numpy as pd
+# img=cv2.imread('3.png')
+
+# height,width=img.shape[:2]
+
+# start_row,start_col=int(height*0.25),int(height*0.25)
+# end_row,end_col=int(height*0.75),int(height*0.75)
+
+# cropped=img[start_row:end_row,start_col:end_col]
+
+# cv2.imshow('orginal image',img)
+# cv2.waitKey(0)
+# cv2.imshow('cropped',cropped)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+
+##############   image Bitwise operation
+# import cv2
+# import numpy as np
+# square=np.zeros((300,300),np.uint8)
+# cv2.rectangle(square,(50,50),(250,250),255,3)
+# cv2.imshow("Square",square)
+# cv2.waitKey(0)
+
+# ellipse= np.zeros((300,300),np.uint8)
+# cv2.ellipse(ellipse,(150,150),(150,150),30,0,180,255,-1)
+# cv2.imshow("Ellise",ellipse)
+# cv2.waitKey(0)
+# # cv2.destroyAllWindows()
+
+#####image smoothing 
+# import cv2
+# img =cv2.imread("1.jpg",0)
+
+# height,width =img.shape
+
+# #Extract slop edge
+# Sobel_x=  cv2.Sobel(img,cv2.CV_64F,1,0,ksize=5)
+# Sobel_y=  cv2.Sobel(img,cv2.CV_64F,1,0,ksize=5)
+
+# cv2.imshow('orginal Image',img)
+
+# cv2.imshow('sobel_x image',Sobel_x)
+# cv2.imshow('sobel_y image',Sobel_y)
+
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+
+
+#####
 import cv2
-import numpy as np
-img=cv2.imread('3.png')
-#lets make the size of our image 3/4 of its 
-img_scaled=cv2.resize(img,None,fx=0.75,fy=0.75)
-cv2.imshow('orginal Image',img)
-cv2.imshow('sclaing-linear Interplotion',img_scaled)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+cap=cv2.VideoCapture(0)
 
-#lets make the double the size of orginal image
-img_scaled=cv2.resize(img,None,fx=2,fy=2,interpolation=cv2.INTER_CUBIC)
-cv2.imshow('sclaing-cubic Interplotion',img_scaled)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-#lets skew the resizing by setting extact dimension
-img_scaled=cv2.resize(img,(900,400),interpolation=cv2.INTER_AREA)
-cv2.imshow('sclaing-skewes sized',img_scaled)
-cv2.waitKey(0)
+while True:
+    ret,frame=cap.read()
+    cv2.imshow('our live sketch',frame)
+    if cv2.waitKey(1)==13:
+        break
+cv2.release(0)
 cv2.destroyAllWindows()
